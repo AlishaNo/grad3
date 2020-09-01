@@ -34,10 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "lodash": "^4.17.20",
-    "lodash.uniqueid": "^4.0.1",
-    "prettier": "^2.1.1"
   }
 }

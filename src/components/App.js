@@ -1,70 +1,67 @@
 import React from "react";
 import GradientItem from "./GradientItem";
 import "../App.css";
-import { uniqueId } from 'lodash';
-
-const regExpHexShort = new RegExp(/^#[0-9A-F]{3}$/gi);
-const regExpHexLong = new RegExp(/^#[0-9A-F]{6}$/gi);
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      primaryColor: "", //сюда должны получать значение из инпута
-      secondaryColor: "", //сюда должны получать значение из инпута
-      colorSets: [
-        {
-          id: '',
-          primary: '',
-          secondary: '',
-        }
-      ],
+      inputValueFirst: "", //сюда должны получать значение из инпута
+      inputValueSecond: "", //сюда должны получать значение из инпута
+      isSubmitted: false,
       isDisabled: false,
+      itemsList: [],
     };
   }
-  
-    handleChange = ({ target: { name, value } }) => {
-  this.setState({
-    [name]: value},
-      this.validateInputValues);
-};
-  
-  validateInputValues() {
-    const { primaryColor, secondaryColor } = this.state;
-    
-    const isPrimaryColorValid = regExpHexShort.test(primaryColor) && regExpHexLong.test(primaryColor);
-    const isSecondaryColorValid = regExpHexShort.test(secondaryColor) && regExpHexLong.test(secondaryColor);
-    
-    this.setState({ isDisabled: isPrimaryColorValid || isSecondaryColorValid });
-  }
-  
-  handleSubmit = (event) => {
-    event.preventDefault();
-    
-    const { primaryColor, secondaryColor, colorSets } = this.state;
-    const colorSet = {
-      id: _.uniqueId(),
-      primary: primaryColor,
-      secondary: secondaryColor
-    };
-    
-    this.setState(prevState => ({
-      colorSets: [...prevState.colorSets, colorSet],
-      primaryColor: '',
-      secondaryColor: ''
-    }))
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+
+    const regExpHexShort = new RegExp(/^#[0-9A-F]{3}$/gi);
+    const regExpHexLong = new RegExp(/^#[0-9A-F]{6}$/gi);
+    if (
+      !(
+        regExpHexShort.test(event.target.value) ||
+        regExpHexLong.test(event.target.value)
+      )
+    ) {
+      console.log("not valid", event.target.value);
+    } else {
+      console.log(" valid", event.target.value);
+    }
   };
 
-  render(){
-    const { colorSets } = this.state;
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const arrayVar = this.state.itemsList;
+    arrayVar.push(
+      <GradientItem
+        inputValueFirst={this.state.inputValueFirst}
+        inputValueSecond={this.state.inputValueSecond}
+        deleteItem={this.deleteItem}
+      />
+    );
+    this.setState({
+      isSubmitted: true,
+      itemsList: arrayVar,
+    });
+  };
+
+  render() {
+    console.log("itemsArray", this.state.itemsList);
+    const items = this.state.itemsList.map((item, index) => (
+      <li key={index}>{item}</li>
+    ));
     return (
       <div className="App">
         <form onSubmit={this.handleSubmit}>
           <label>
             <input
               placeholder="hex1"
-              name="primaryColor"
-              value={this.state.primaryColor}
+              name="inputValueFirst"
+              value={this.state.inputValueFirst}
               type="text"
               onChange={this.handleChange}
               required
@@ -73,8 +70,8 @@ class App extends React.Component {
           <label>
             <input
               placeholder="hex2"
-              name="secondaryColor"
-              value={this.state.secondaryColor}
+              name="inputValueSecond"
+              value={this.state.inputValueSecond}
               type="text"
               onChange={this.handleChange}
               required
@@ -84,11 +81,7 @@ class App extends React.Component {
             Add Gradient
           </button>
         </form>
-        <ul style={{ listStyle: "none" }}>
-          {colorSets.map(colorSet => (
-              <GradientItem key={colorSet.id} colorSet={colorSet} />
-          ))}
-        </ul>
+        <ul style={{ listStyle: "none" }}>{items}</ul>
       </div>
     );
   }
