@@ -1,7 +1,7 @@
 import React from "react";
 import GradientItem from "./GradientItem";
 import "../App.css";
-import { uniqueId } from 'lodash';
+import _uniqueId from "lodash/uniqueId";
 
 const regExpHexShort = new RegExp(/^#[0-9A-F]{3}$/gi);
 const regExpHexLong = new RegExp(/^#[0-9A-F]{6}$/gi);
@@ -10,86 +10,85 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      primaryColor: "", //сюда должны получать значение из инпута
-      secondaryColor: "", //сюда должны получать значение из инпута
-      colorSets: [
-        {
-          id: '',
-          primary: '',
-          secondary: '',
-        }
-      ],
+      primaryColor: "",
+      secondaryColor: "",
+      colorSets: [],
       isDisabled: false,
     };
   }
-  
+
   handleChange = ({ target: { name, value } }) => {
-    this.setState({
-          [name]: value},
-        this.validateInputValues);
+    this.setState(
+      {
+        [name]: value,
+      },
+      this.validateInputValues
+    );
   };
-  
+
   validateInputValues() {
     const { primaryColor, secondaryColor } = this.state;
-    
-    const isPrimaryColorValid = regExpHexShort.test(primaryColor) && regExpHexLong.test(primaryColor);
-    const isSecondaryColorValid = regExpHexShort.test(secondaryColor) && regExpHexLong.test(secondaryColor);
-    
+
+    const isPrimaryColorValid =
+      regExpHexShort.test(primaryColor) && regExpHexLong.test(primaryColor);
+    const isSecondaryColorValid =
+      regExpHexShort.test(secondaryColor) && regExpHexLong.test(secondaryColor);
+
     this.setState({ isDisabled: isPrimaryColorValid || isSecondaryColorValid });
   }
-  
+
   handleSubmit = (event) => {
     event.preventDefault();
-    
-    const { primaryColor, secondaryColor, colorSets } = this.state;
+
+    const { primaryColor, secondaryColor } = this.state;
     const colorSet = {
-      id: _.uniqueId(),
+      id: _uniqueId(),
       primary: primaryColor,
-      secondary: secondaryColor
+      secondary: secondaryColor,
     };
-    
-    this.setState(prevState => ({
+
+    this.setState((prevState) => ({
       colorSets: [...prevState.colorSets, colorSet],
-      primaryColor: '',
-      secondaryColor: ''
-    }))
+      primaryColor: "",
+      secondaryColor: "",
+    }));
   };
-  
-  render(){
+
+  render() {
     const { colorSets } = this.state;
     return (
-        <div className="App">
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              <input
-                  placeholder="hex1"
-                  name="primaryColor"
-                  value={this.state.primaryColor}
-                  type="text"
-                  onChange={this.handleChange}
-                  required
-              />
-            </label>
-            <label>
-              <input
-                  placeholder="hex2"
-                  name="secondaryColor"
-                  value={this.state.secondaryColor}
-                  type="text"
-                  onChange={this.handleChange}
-                  required
-              />
-            </label>
-            <button disabled={this.state.isDisabled} type="submit">
-              Add Gradient
-            </button>
-          </form>
-          <ul style={{ listStyle: "none" }}>
-            {colorSets.map(colorSet => (
-                <GradientItem key={colorSet.id} colorSet={colorSet} />
-            ))}
-          </ul>
-        </div>
+      <div className="App">
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            <input
+              placeholder="hex1"
+              name="primaryColor"
+              value={this.state.primaryColor}
+              type="text"
+              onChange={this.handleChange}
+              required
+            />
+          </label>
+          <label>
+            <input
+              placeholder="hex2"
+              name="secondaryColor"
+              value={this.state.secondaryColor}
+              type="text"
+              onChange={this.handleChange}
+              required
+            />
+          </label>
+          <button disabled={this.state.isDisabled} type="submit">
+            Add Gradient
+          </button>
+        </form>
+        <ul style={{ listStyle: "none" }}>
+          {colorSets.map((colorSet) => (
+            <GradientItem key={colorSet.id} colorSet={colorSet} />
+          ))}
+        </ul>
+      </div>
     );
   }
 }
