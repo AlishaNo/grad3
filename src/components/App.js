@@ -58,7 +58,6 @@ class App extends React.Component {
     const { colorSets } = this.state;
     return (
       <div className="App">
-      <h1>"new branch" </h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input
