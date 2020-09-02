@@ -80,7 +80,7 @@ class App extends React.Component {
             />
           </label>
           <button disabled={this.state.isDisabled} type="submit">
-            Add Gradient
+            Add Gradient new branch
           </button>
         </form>
         <ul style={{ listStyle: "none" }}>
