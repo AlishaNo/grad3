@@ -3,9 +3,6 @@ import GradientItem from "./GradientItem";
 import "../App.css";
 import _uniqueId from "lodash/uniqueId";
 
-const regExpHexShort = new RegExp(/^#[0-9A-F]{3}$/gi);
-const regExpHexLong = new RegExp(/^#[0-9A-F]{6}$/gi);
-
 class App extends React.Component {
   constructor() {
     super();
@@ -23,18 +20,18 @@ class App extends React.Component {
         [name]: value,
       },
       this.validateInputValues
-    );
+    )
   };
 
   validateInputValues() {
     const { primaryColor, secondaryColor } = this.state;
-
-    const isPrimaryColorValid =
-      regExpHexShort.test(primaryColor) && regExpHexLong.test(primaryColor);
-    const isSecondaryColorValid =
-      regExpHexShort.test(secondaryColor) && regExpHexLong.test(secondaryColor);
-
-    this.setState({ isDisabled: isPrimaryColorValid || isSecondaryColorValid });
+  
+    const isPrimaryColorValid = primaryColor.length < 5 ? /^#[0-9A-F]{3}$/gi.test(primaryColor) : /^#[0-9A-F]{6}$/gi.test(primaryColor);
+    const isSecondaryColorValid = secondaryColor.length < 5 ? /^#[0-9A-F]{3}$/gi.test(secondaryColor) : /^#[0-9A-F]{6}$/gi.test(secondaryColor);
+    
+    this.setState({
+      isDisabled: !(isPrimaryColorValid && isSecondaryColorValid)
+    });
   }
 
   handleSubmit = (event) => {
@@ -81,7 +78,7 @@ class App extends React.Component {
             />
           </label>
           <button disabled={this.state.isDisabled} type="submit">
-            Add Gradient master
+            Add Gradient!
           </button>
         </form>
         <ul style={{ listStyle: "none" }}>
