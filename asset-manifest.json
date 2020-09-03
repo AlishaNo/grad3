@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/grad3/static/css/main.050523cc.chunk.css",
-    "main.js": "/grad3/static/js/main.36de25e2.chunk.js",
-    "main.js.map": "/grad3/static/js/main.36de25e2.chunk.js.map",
+    "main.css": "/grad3/static/css/main.8fc5f9c0.chunk.css",
+    "main.js": "/grad3/static/js/main.ee400b6f.chunk.js",
+    "main.js.map": "/grad3/static/js/main.ee400b6f.chunk.js.map",
     "runtime-main.js": "/grad3/static/js/runtime-main.2d896fbe.js",
     "runtime-main.js.map": "/grad3/static/js/runtime-main.2d896fbe.js.map",
     "static/js/2.5a704ded.chunk.js": "/grad3/static/js/2.5a704ded.chunk.js",
     "static/js/2.5a704ded.chunk.js.map": "/grad3/static/js/2.5a704ded.chunk.js.map",
     "index.html": "/grad3/index.html",
-    "precache-manifest.13de7d7946d7dacc7b516ae023dffd95.js": "/grad3/precache-manifest.13de7d7946d7dacc7b516ae023dffd95.js",
+    "precache-manifest.6de957e81e3631458b127ca9a73e811a.js": "/grad3/precache-manifest.6de957e81e3631458b127ca9a73e811a.js",
     "service-worker.js": "/grad3/service-worker.js",
-    "static/css/main.050523cc.chunk.css.map": "/grad3/static/css/main.050523cc.chunk.css.map",
+    "static/css/main.8fc5f9c0.chunk.css.map": "/grad3/static/css/main.8fc5f9c0.chunk.css.map",
     "static/js/2.5a704ded.chunk.js.LICENSE.txt": "/grad3/static/js/2.5a704ded.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2d896fbe.js",
     "static/js/2.5a704ded.chunk.js",
-    "static/css/main.050523cc.chunk.css",
-    "static/js/main.36de25e2.chunk.js"
+    "static/css/main.8fc5f9c0.chunk.css",
+    "static/js/main.ee400b6f.chunk.js"
   ]
 }
