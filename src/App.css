@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -35,4 +37,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.inputBlock {
+  padding: 1rem;
+}
+
+
+.gradientForm input {
+  width: 70%;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.gradientForm button {
+  padding: 15px;
+  width: 70%;
+  background-color: rgba(195, 182, 246, 1);
+  border: none;
+  border-radius: 2px;
+}
+ul {
+  padding: 0;
+}
+ul div.gradientBlock {
+  width: 70%;
+  position: relative;
+}
+.gradientBlock button {
+  border-radius: 50%;
+  background-color: rgba(86, 50, 231, 1);
+  color: #ffffff;
+  border: none;
+  position: absolute;
+  left: 96%;
+  bottom: 89%;
 }

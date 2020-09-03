@@ -50,13 +50,21 @@ class App extends React.Component {
       secondaryColor: "",
     }));
   };
+  removeItem = colorSet => {
+  const updateColors = this.state.colorSets.filter(function (item) {
+  return item.id !== colorSet.id;
+  });
+    this.setState({
+      colorSets: updateColors
+    })
+};
 
   render() {
     const { colorSets } = this.state;
     return (
       <div className="App">
-    
-        <form onSubmit={this.handleSubmit}>
+        <form  className='gradientForm' onSubmit={this.handleSubmit}>
+          <div className='inputBlock'>
           <label>
             <input
               placeholder="hex1"
@@ -77,13 +85,16 @@ class App extends React.Component {
               required
             />
           </label>
+          </div>
           <button disabled={this.state.isDisabled} type="submit">
             Add Gradient!
           </button>
         </form>
         <ul style={{ listStyle: "none" }}>
           {colorSets.map((colorSet) => (
-            <GradientItem key={colorSet.id} colorSet={colorSet} />
+            <GradientItem key={colorSet.id}
+                          colorSet={colorSet}
+                          removeItem={this.removeItem}/>
           ))}
         </ul>
       </div>
